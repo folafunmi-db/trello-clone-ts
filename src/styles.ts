@@ -9,13 +9,15 @@ export const AppContainer = styled.div`
 	height: max-content;
 	padding: 20px;
 	width: 100%;
+	justify-content: center;
+	flex: 1;
 `;
 
 export const ColumnContainer = styled.div`
 	background-color: #ebecf0;
 	width: 300px;
 	min-height: 40px;
-	margin-right: 20px;
+	/* margin-right: 20px; */
 	border-radius: 3px;
 	padding: 8px 8px;
 	flex-grow: 0;
@@ -87,4 +89,3 @@ export const NewItemInput = styled.input`
 	padding: 0.5rem 1rem;
 	width: 100%;
 `;
-
