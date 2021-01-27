@@ -2,10 +2,11 @@ import styled from "styled-components/macro";
 
 export const AppContainer = styled.div`
 	align-items: flex-start;
-	background-color: #3179ba;
 	display: flex;
 	flex-direction: row;
-	height: 100%;
+	flex-wrap: wrap;
+	gap: 1rem;
+	height: max-content;
 	padding: 20px;
 	width: 100%;
 `;
@@ -22,7 +23,8 @@ export const ColumnContainer = styled.div`
 
 export const ColumnTitle = styled.div`
 	padding: 6px 16px 12px;
-	font-weight: bold;
+	font-weight: 700;
+	font-size: 1.5rem;
 `;
 
 export const CardContainer = styled.div`
@@ -50,6 +52,7 @@ export const AddItemButton = styled.button<AddItemButtonProps>`
 	text-align: left;
 	transition: background 85ms ease-in;
 	width: 100%;
+	font-family: inherit;
 
 	&:hover {
 		background-color: #ffffff52;
@@ -65,13 +68,14 @@ export const NewItemFormContainer = styled.div`
 `;
 
 export const NewItemButton = styled.button`
-	background-color: #5aac44;
+	background-color: #964ec2;
 	border-radius: 3px;
 	border: none;
 	box-shadow: none;
 	color: #fff;
 	padding: 6px 12px;
 	cursor: pointer;
+	font-family: inherit;
 	text-align: center;
 `;
 

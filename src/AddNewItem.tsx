@@ -16,7 +16,7 @@ const AddNewItem = (props: AddNewItemProps) => {
 		return (
 			<NewItemForm
 				onAdd={(text) => {
-					onAdd(text);
+					text.length > 0 && onAdd(text);
 					setShowForm(false);
 				}}
 			/>

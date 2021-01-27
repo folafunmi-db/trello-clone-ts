@@ -1,6 +1,7 @@
 import { createContext, useReducer, useContext } from "react";
 import findItemIndexById from "./utils/findItemIndexById";
 import { v4 as uuidv4 } from "uuid";
+import {DragItem} from "./DragItem"
 
 interface Task {
 	id: string;
@@ -15,6 +16,7 @@ interface List {
 
 interface AppState {
 	lists: List[];
+	draggedItem?: DragItem;
 }
 
 interface AppStateContextProps {
@@ -68,6 +70,17 @@ type Action =
 	| {
 			type: "ADD_TASK";
 			payload: { text: string; taskId: string };
+	  }
+	| {
+			type: "MOVE_LIST";
+			payload: {
+				dragIndex: number;
+				hoverIndex: number;
+			};
+	  }
+	| {
+			type: "SET_DRAGGED_ITEM";
+			payload: DragItem | undefined;
 	  };
 
 const appStateReducer = (state: AppState, action: Action): AppState => {
@@ -97,10 +110,27 @@ const appStateReducer = (state: AppState, action: Action): AppState => {
 			return { ...state };
 		}
 
+		case "MOVE_LIST": {
+			// reducer logic here
+			const { dragIndex, hoverIndex } = action.payload;
+			state.lists = moveItem(state.lists, dragIndex, hoverIndex);
+			return { ...state };
+		}
+
+		case "SET_DRAGGED_ITEM": {
+			return { ...state, draggedItem: action.payload };
+		}
 		default: {
 			return state;
 		}
 	}
+};
+
+export const moveItem = (array: Array<any>, from: number, to: number) => {
+	const startIndex = to < 0 ? array.length + to : to;
+	const item = array.splice(from, 1)[0];
+	array.splice(startIndex, 0, item);
+	return array;
 };
 
 export const AppStateProvider = ({ children }: React.PropsWithChildren<{}>) => {
