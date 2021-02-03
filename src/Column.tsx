@@ -13,9 +13,15 @@ interface ColumnProps {
 	text: string;
 	index: number;
 	id: string;
+	isPreview?: boolean;
 }
 
-const Column = ({ text, index, id }: PropsWithChildren<ColumnProps>) => {
+const Column = ({
+	text,
+	index,
+	id,
+	isPreview,
+}: PropsWithChildren<ColumnProps>) => {
 	const { state, dispatch } = useAppState();
 	const ref = useRef<HTMLDivElement>(null);
 	const [, drop] = useDrop({
@@ -40,7 +46,8 @@ const Column = ({ text, index, id }: PropsWithChildren<ColumnProps>) => {
 	return (
 		<ColumnContainer
 			ref={ref}
-			isHidden={isHidden(state.draggedItem, "COLUMN", id)}
+			isPreview={isPreview}
+			isHidden={isHidden(isPreview, state.draggedItem, "COLUMN", id)}
 		>
 			<ColumnTitle>{text}</ColumnTitle>
 			{state.lists[index].tasks.map((task, i) => (
